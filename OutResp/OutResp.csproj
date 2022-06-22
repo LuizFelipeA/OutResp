@@ -4,7 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    
+    <PackageId>OutResp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Luiz Felipe</Authors>
+    <PackageDescription>OutResp</PackageDescription>
+    <RepositoryUrl>https://github.com/LuizFelipeA/OutResp</RepositoryUrl>
   </PropertyGroup>
+  
 
   <ItemGroup>
     <Compile Remove="IOutRespSimple.cs" />
