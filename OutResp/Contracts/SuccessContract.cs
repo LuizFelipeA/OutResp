@@ -59,5 +59,15 @@ public class SuccessContract<T> :
         return this;
     }
 
-    public IActionResult ToActionResult() => StatusCode((int)StatusCode, Value);
+    public IActionResult ToActionResult()
+        => StatusCode(
+            (int)StatusCode, 
+            new
+            {
+                IsSuccess = IsSuccess,
+                Notifications = Notifications,
+                Messages = Messages,
+                StatusCode = StatusCode,
+                Value = Value
+            });
 }
