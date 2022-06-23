@@ -10,6 +10,7 @@
     <Authors>Luiz Felipe</Authors>
     <PackageDescription>OutResp</PackageDescription>
     <RepositoryUrl>https://github.com/LuizFelipeA/OutResp</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   
 
