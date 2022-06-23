@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OutResponse;
 
 namespace OutResp.Tests;
@@ -107,5 +108,16 @@ public class SuccessTests
             .AddValue("1q2w3e$##");
         
         Assert.AreEqual("1q2w3e$##", outResp.Value);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespSuccess")]
+    public void SuccessShouldReturnIActionResult()
+    {
+        var outResp = OutRespContract
+            .Success<object>()
+            .ToActionResult();
+
+        Assert.IsTrue(outResp is IActionResult);
     }
 }
