@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OutResp.Interfaces;
 
@@ -15,4 +16,6 @@ public interface ISuccessContract<T> : IOutResp<T>
     ISuccessContract<T> AddStatusCode(HttpStatusCode statusCode);
 
     ISuccessContract<T> AddValue(T value);
+
+    IActionResult ToActionResult();
 }

@@ -12,7 +12,6 @@ public class SuccessTests
     {
         var outResp = OutRespContract.Success<object>();
 
-        
         Assert.AreEqual(HttpStatusCode.OK, outResp.StatusCode);
     }
 

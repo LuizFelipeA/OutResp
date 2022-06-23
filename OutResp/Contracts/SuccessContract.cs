@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OutResp.Interfaces;
 using OutResp.Models;
 
@@ -57,4 +58,6 @@ public class SuccessContract<T> :
         Value = value;
         return this;
     }
+
+    public IActionResult ToActionResult() => StatusCode((int)StatusCode, Value);
 }

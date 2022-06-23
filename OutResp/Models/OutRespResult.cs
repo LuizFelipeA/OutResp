@@ -1,9 +1,12 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OutResp.Interfaces;
 
 namespace OutResp.Models;
 
-public class OutRespResult<T> : IOutResp<T>
+public class OutRespResult<T> : 
+    ControllerBase,
+    IOutResp<T>
 {
     internal OutRespResult()
     {
