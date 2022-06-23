@@ -13,10 +13,4 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   
-
-  <ItemGroup>
-    <Compile Remove="IOutRespSimple.cs" />
-    <Compile Remove="Class1.cs" />
-  </ItemGroup>
-
 </Project>

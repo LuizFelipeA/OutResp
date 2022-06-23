@@ -1,4 +1,5 @@
 using System.Net;
+using OutResponse;
 
 namespace OutResp.Tests;
 
@@ -9,7 +10,8 @@ public class SuccessTests
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturn200StatusCodeByDefault()
     {
-        var outResp = OutResp.Success<object>();
+        var outResp = OutRespContract.Success<object>();
+
         
         Assert.AreEqual(HttpStatusCode.OK, outResp.StatusCode);
     }
@@ -18,7 +20,7 @@ public class SuccessTests
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturnStatusCodeSpecified()
     {
-        var outResp = OutResp
+        var outResp = OutRespContract
             .Success<object>()
             .AddStatusCode(HttpStatusCode.Created);
         
@@ -29,7 +31,7 @@ public class SuccessTests
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturnIsSuccessEqualsTrueByDefault()
     {
-        var outResp = OutResp.Success<object>();
+        var outResp = OutRespContract.Success<object>();
         
         Assert.IsTrue(outResp.IsSuccess);
     }
@@ -38,7 +40,7 @@ public class SuccessTests
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturnMessagesEmptyListIfNotSpecified()
     {
-        var outResp = OutResp.Success<object>();
+        var outResp = OutRespContract.Success<object>();
 
         Assert.AreEqual(0, outResp.Messages.Count);
     }
@@ -49,7 +51,7 @@ public class SuccessTests
     {
         var messages = new[] { "message number one", "message number two" };
 
-        var outResp = OutResp
+        var outResp = OutRespContract
             .Success<object>()
             .AddMessages(messages);
 
@@ -65,7 +67,7 @@ public class SuccessTests
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturnNotificationsEmptyListIfNotSpecified()
     {
-        var outResp = OutResp.Success<object>();
+        var outResp = OutRespContract.Success<object>();
         
         Assert.AreEqual(0, outResp.Notifications.Count);
     }
@@ -76,7 +78,7 @@ public class SuccessTests
     {
         var notifications = new[] { "notification number one", "notification number two" };
 
-        var outResp = OutResp
+        var outResp = OutRespContract
             .Success<object>()
             .AddNotifications(notifications);
 
@@ -92,7 +94,7 @@ public class SuccessTests
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturnValueNullIfNotSpecified()
     {
-        var outResp = OutResp.Success<object>();
+        var outResp = OutRespContract.Success<object>();
         
         Assert.IsNull(outResp.Value);
     }
@@ -101,7 +103,7 @@ public class SuccessTests
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturnValueSpecified()
     {
-        var outResp = OutResp
+        var outResp = OutRespContract
             .Success<string>()
             .AddValue("1q2w3e$##");
         
