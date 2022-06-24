@@ -1,9 +1,12 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OutResp.Interfaces;
 
 namespace OutResp.Models;
 
-public class OutRespSimpleResult : IOutResp
+public class OutRespSimpleResult :
+    ControllerBase,
+    IOutResp
 {
     public List<string> Notifications { get; protected set; }
 

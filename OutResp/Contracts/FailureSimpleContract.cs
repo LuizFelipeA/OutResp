@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using OutResp.Interfaces;
 using OutResp.Models;
 
@@ -31,4 +32,14 @@ public class FailureSimpleContract :
         Messages.AddRange(messages);
         return this;
     }
+
+    public IActionResult ToActionResult()
+        => StatusCode(
+            (int)StatusCode,
+            new
+            {
+                Success = IsSuccess,
+                StatusCode = StatusCode,
+                Messages = Messages
+            });
 }

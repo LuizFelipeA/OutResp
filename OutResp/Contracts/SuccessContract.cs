@@ -64,10 +64,9 @@ public class SuccessContract<T> :
             (int)StatusCode, 
             new
             {
-                IsSuccess = IsSuccess,
-                Notifications = Notifications,
+                Success = IsSuccess,
                 Messages = Messages,
                 StatusCode = StatusCode,
-                Value = Value
+                Data = Value
             });
 }
