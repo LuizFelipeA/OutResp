@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OutResp.Interfaces;
 
@@ -16,4 +17,5 @@ public interface IFailureContract<T> : IOutResp<T>
 
     IFailureContract<T> AddValue(T value);
 
+    IActionResult ToActionResult();
 }
