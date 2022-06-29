@@ -9,7 +9,7 @@ public class SuccessTests
 {
     [TestMethod]
     [TestCategory("OutRespSuccess")]
-    public void SuccessShouldReturn200StatusCodeByDefault()
+    public void SuccessShouldReturnStatusCodeOkByDefault()
     {
         var outResp = OutRespContract.Success<object>();
 
@@ -112,7 +112,7 @@ public class SuccessTests
 
     [TestMethod]
     [TestCategory("OutRespSuccess")]
-    public void SuccessShouldReturnIActionResult()
+    public void SuccessShouldReturnIActionResultWhenUseToActionResult()
     {
         var outResp = OutRespContract
             .Success<object>()
@@ -162,5 +162,12 @@ public class SuccessTests
         var outResp = OutRespContract.Success();
         
         Assert.IsTrue(outResp.IsSuccess);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespSimpleSuccess")]
+    public void SimpleSuccessShouldReturnIActionResult()
+    {
+        Assert.Fail();
     }
 }
