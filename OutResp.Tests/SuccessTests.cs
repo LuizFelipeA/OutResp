@@ -7,6 +7,19 @@ namespace OutResp.Tests;
 [TestClass]
 public class SuccessTests
 {
+    private readonly List<string> _listMessages = new();
+
+    private readonly List<string> _listNotifications = new();
+    
+    public SuccessTests()
+    {
+        _listMessages.Add("message number one.");
+        _listMessages.Add("message number two.");
+        
+        _listNotifications.Add("notification number one.");
+        _listNotifications.Add("notification number two.");
+    }
+
     [TestMethod]
     [TestCategory("OutRespSuccess")]
     public void SuccessShouldReturnStatusCodeOkByDefault()
@@ -86,7 +99,7 @@ public class SuccessTests
             .OrderBy(x => x)
             .SequenceEqual(notifications.OrderBy(x => x));
         
-        Assert.IsNotNull(outResp.Messages);
+        Assert.IsNotNull(outResp.Notifications);
         Assert.IsTrue(areEquals);
     }
 
@@ -168,6 +181,8 @@ public class SuccessTests
     [TestCategory("OutRespSimpleSuccess")]
     public void SimpleSuccessShouldReturnIActionResult()
     {
-        Assert.Fail();
+        var simpleOutResp = OutRespContract.Success().ToActionResult();
+        
+        Assert.IsTrue(simpleOutResp is IActionResult);
     }
 }

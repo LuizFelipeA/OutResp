@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using OutResponse;
 
@@ -6,25 +7,46 @@ namespace OutResp.Tests;
 [TestClass]
 public class FailureTests
 {
+    private readonly List<string> _listMessages = new();
+
+    private readonly List<string> _listNotifications = new();
+    
+    internal FailureTests()
+    {
+        _listMessages.Add("message number one.");
+        _listMessages.Add("message number two.");
+        
+        _listNotifications.Add("notification number one.");
+        _listNotifications.Add("notification number two.");
+    }
+
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnStatusCodeBadRequestByDefault()
     {
-        Assert.Fail();
+        var outResp = OutRespContract.Failure<object>();
+
+        Assert.AreEqual(HttpStatusCode.BadRequest, outResp.StatusCode);
     }
 
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnStatusCodeSpecified()
     {
-        Assert.Fail();
+        var outResp = OutRespContract
+            .Failure<object>()
+            .AddStatusCode(HttpStatusCode.NotFound);
+        
+        Assert.AreEqual(HttpStatusCode.NotFound, outResp.StatusCode);
     }
     
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnSuccessEqualsToFalseByDefault()
     {
-        Assert.Fail();
+        var outResp = OutRespContract.Failure<object>();
+        
+        Assert.IsFalse(outResp.IsSuccess);
     }
 
     [TestMethod]
@@ -40,35 +62,61 @@ public class FailureTests
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnMessageSpecified()
     {
-        Assert.Fail();
+        var outResp = OutRespContract
+            .Failure<object>()
+            .AddMessages(_listMessages);
+
+        var areEquals = outResp.Messages
+            .OrderBy(x => x)
+            .SequenceEqual(_listMessages.OrderBy(x => x));
+            
+        Assert.IsNotNull(outResp.Messages);
+        Assert.IsTrue(areEquals);
     }
 
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnNotificationsEmptyListIfNotSpecified()
     {
-        Assert.Fail();
+        var outResp = OutRespContract.Failure<object>();
+        
+        Assert.AreEqual(0, outResp.Notifications.Count);
     }
 
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnNotificationsSpecified()
     {
-        Assert.Fail();
+        var outResp = OutRespContract
+            .Failure<object>()
+            .AddNotifications(_listNotifications);
+
+        var areEquals = outResp.Notifications
+            .OrderBy(x => x)
+            .SequenceEqual(_listNotifications.OrderBy(x => x));
+        
+        Assert.IsNotNull(outResp.Notifications);
+        Assert.IsTrue(areEquals);
     }
 
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnValueNullIfNotSpecified()
     {
-        Assert.Fail();
+        var outResp = OutRespContract.Failure<object>();
+        
+        Assert.IsNull(outResp.Value);
     }
 
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnValueSpecified()
     {
-        Assert.Fail();
+        var outResp = OutRespContract
+            .Failure<string>()
+            .AddValue("string");
+        
+        Assert.AreEqual("string", outResp.Value);
     }
 
     [TestMethod]
@@ -85,37 +133,52 @@ public class FailureTests
     [TestCategory("OutRespSimpleFailureResponse")]
     public void SimpleFailureShouldReturnNoMessageIfAnyMessageBeSpecified()
     {
-        Assert.Fail();
+        var outResp = OutRespContract.Failure();
+        
+        Assert.AreEqual(0, outResp.Messages);
     }
     
     [TestMethod]
     [TestCategory("OutRespSimpleFailureResponse")]
     public void SimpleFailureShouldReturnMessageSpecified()
     {
-        Assert.Fail();
+        var simpleOutResp = OutRespContract
+            .Failure()
+            .AddMessages(_listMessages);
+
+        var areEquals = simpleOutResp.Messages
+            .OrderBy(x => x)
+            .SequenceEqual(_listMessages.OrderBy(x => x));
+        
+        Assert.IsNotNull(simpleOutResp.Messages);
+        Assert.IsTrue(areEquals);
     }
     
     [TestMethod]
     [TestCategory("OutRespSimpleFailureResponse")]
     public void SimpleFailureShouldReturnStatusCodeBadRequestByDefault()
     {
-        Assert.Fail();
+        var simpleOutResp = OutRespContract.Failure();
+        
+        Assert.AreEqual(HttpStatusCode.BadRequest, simpleOutResp.StatusCode);
     }
 
     [TestMethod]
     [TestCategory("OutRespSimpleFailureResponse")]
     public void SimpleFailureShouldReturnIsSuccessAsFalseByDefault()
     {
-        Assert.Fail();
+        var simpleOutResp = OutRespContract.Failure();
+        
+        Assert.IsFalse(simpleOutResp.IsSuccess);
     }
 
     [TestMethod]
     [TestCategory("OutRespSimpleFailureResponse")]
     public void SimpleFailureShouldReturnAsIActionResult()
     {
-        var outResp = OutRespContract
+        var simpleOutResp = OutRespContract
             .Failure().ToActionResult();
 
-        Assert.IsTrue(outResp is IActionResult);
+        Assert.IsTrue(simpleOutResp is IActionResult);
     }
 }
