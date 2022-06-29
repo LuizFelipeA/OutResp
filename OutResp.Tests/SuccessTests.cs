@@ -120,4 +120,47 @@ public class SuccessTests
 
         Assert.IsTrue(outResp is IActionResult);
     }
+
+    [TestMethod]
+    [TestCategory("OutRespSimpleSuccess")]
+    public void SimpleSuccessShouldReturnNoMessageIfAnyMessageBeSpecified()
+    {
+        var outResp = OutRespContract.Success();
+        
+        Assert.AreEqual(0, outResp.Messages.Count);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespSimpleSuccess")]
+    public void SimpleSuccessShouldReturnMessagesSpecified()
+    {
+        var messages = new[] { "message number one", "message number two" };
+
+        var outResp = OutRespContract.Success().AddMessages(messages);
+        
+        var areEquals = outResp.Messages
+            .OrderBy(x => x)
+            .SequenceEqual(messages.OrderBy(x => x));
+
+        Assert.IsNotNull(outResp.Messages);
+        Assert.IsTrue(areEquals);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespSimpleSuccess")]
+    public void SimpleSuccessShouldReturnStatusCodeOkByDefault()
+    {
+        var outResp = OutRespContract.Success();
+        
+        Assert.AreEqual(HttpStatusCode.OK, outResp.StatusCode);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespSimpleSuccess")]
+    public void SimpleSuccessShouldReturnIsSuccessTrueByDefault()
+    {
+        var outResp = OutRespContract.Success();
+        
+        Assert.IsTrue(outResp.IsSuccess);
+    }
 }

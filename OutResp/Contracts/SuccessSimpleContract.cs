@@ -13,6 +13,7 @@ public class SuccessSimpleContract :
     {
         StatusCode = HttpStatusCode.OK;
         IsSuccess = true;
+        Messages = new List<string>();
     }
 
     public ISuccessSimpleContract AddMessage(string message)

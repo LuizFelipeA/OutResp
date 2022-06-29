@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OutResp.Interfaces;
 
-public interface ISuccessSimpleContract
+public interface ISuccessSimpleContract : IOutResp
 {
     ISuccessSimpleContract AddMessage(string message);
 
