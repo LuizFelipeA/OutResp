@@ -31,6 +31,9 @@ public static partial class OutRespContract
 /// </summary>
 public static partial class OutRespContract
 {
+    public static ISuccessSimpleContract Success()
+        => new SuccessSimpleContract();
+    
     public static IFailureSimpleContract Failure()
         => new FailureSimpleContract();
 }
