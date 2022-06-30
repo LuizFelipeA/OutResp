@@ -2,6 +2,7 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using OutResp.Interfaces;
 using OutResp.Models;
+using OutResponse.Enums;
 
 namespace OutResp.Contracts;
 
@@ -9,27 +10,42 @@ public class SuccessContract<T> :
     OutRespResult<T>,
     ISuccessContract<T>
 {
-    internal SuccessContract() { IsSuccess = true; StatusCode = HttpStatusCode.OK; }
+    internal SuccessContract()
+    {
+        IsValid = true;
+        IsSuccess = true;
+        StatusCode = HttpStatusCode.OK;
+    }
 
-    public ISuccessContract<T> AddNotification(string notification)
+    public ISuccessContract<T> AddNotification(
+        in string notification,
+        ENotificationType notificationType)
     {
         if(string.IsNullOrEmpty(notification))
             return this;
+        
+        if(notificationType == ENotificationType.Warning)
+            Notifications.Add($"WARNING: {notification}");
 
-        Notifications.Add(notification);
         return this;
     }
 
-    public ISuccessContract<T> AddNotifications(IEnumerable<string> notifications)
+    public ISuccessContract<T> AddNotifications(
+        IEnumerable<string> notifications,
+        ENotificationType notificationType)
     {
         if(notifications is null)
             return this;
         
+        if (notificationType == ENotificationType.Error)
+            IsValid = false;
+        
         Notifications.AddRange(notifications);
+        
         return this;
     }
 
-    public ISuccessContract<T> AddMessage(string message)
+    public ISuccessContract<T> AddMessage(in string message)
     {
         if(string.IsNullOrEmpty(message))
             return this;

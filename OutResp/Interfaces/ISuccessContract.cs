@@ -1,15 +1,19 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using OutResponse.Enums;
 
 namespace OutResp.Interfaces;
 
 public interface ISuccessContract<T> : IOutResp<T>
 {
-    ISuccessContract<T> AddNotification(string notification);
+    ISuccessContract<T> AddNotification(in string notification,
+        ENotificationType notificationType);
 
-    ISuccessContract<T> AddNotifications(IEnumerable<string> notifications);
+    ISuccessContract<T> AddNotifications(
+        IEnumerable<string> notifications,
+        ENotificationType notificationType);
 
-    ISuccessContract<T> AddMessage(string message);
+    ISuccessContract<T> AddMessage(in string message);
 
     ISuccessContract<T> AddMessages(IEnumerable<string> messages);
 

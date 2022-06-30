@@ -11,9 +11,9 @@ public class SuccessSimpleContract :
 {
     public SuccessSimpleContract()
     {
-        StatusCode = HttpStatusCode.OK;
+        IsValid = true;
         IsSuccess = true;
-        Messages = new List<string>();
+        StatusCode = HttpStatusCode.OK;
     }
 
     public ISuccessSimpleContract AddMessage(string message)

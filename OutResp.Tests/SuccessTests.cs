@@ -1,6 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using OutResponse;
+using OutResponse.Enums;
 
 namespace OutResp.Tests;
 
@@ -75,6 +76,37 @@ public class SuccessTests
         Assert.IsNotNull(outResp.Messages);
         Assert.IsTrue(areEquals);
     }
+    
+    [TestMethod]
+    [TestCategory("OutRespSuccess")]
+    public void SuccessShouldReturnIsValidTrueByDefault()
+    {
+        var outResp = OutRespContract.Success<object>();
+        
+        Assert.IsTrue(outResp.IsValid);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespSuccess")]
+    public void SuccessShouldReturnIsValidTrueWhenNotificationTypeIsEqualsToWarning()
+    {
+        var outResp = OutRespContract
+            .Success<object>()
+            .AddNotification("notification message", ENotificationType.Warning);
+        
+        Assert.IsTrue(outResp.IsValid);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespSuccess")]
+    public void SuccessShouldReturnIgnoreAndSetIsValidTrueWhenNotificationTypeIsEqualsToError()
+    {
+        var outResp = OutRespContract
+            .Success<object>()
+            .AddNotification("notification message", ENotificationType.Error);
+        
+        Assert.IsTrue(outResp.IsValid);
+    }
 
     [TestMethod]
     [TestCategory("OutRespSuccess")]
@@ -93,7 +125,7 @@ public class SuccessTests
 
         var outResp = OutRespContract
             .Success<object>()
-            .AddNotifications(notifications);
+            .AddNotifications(notifications, ENotificationType.Warning);
 
         var areEquals = outResp.Notifications
             .OrderBy(x => x)
@@ -184,5 +216,14 @@ public class SuccessTests
         var simpleOutResp = OutRespContract.Success().ToActionResult();
         
         Assert.IsTrue(simpleOutResp is IActionResult);
+    }
+    
+    [TestMethod]
+    [TestCategory("OutRespSimpleSuccess")]
+    public void SimpleSuccessShouldReturnIsValidTrueByDefault()
+    {
+        var outResp = OutRespContract.Success();
+        
+        Assert.IsTrue(outResp.IsValid);
     }
 }

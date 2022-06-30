@@ -8,6 +8,12 @@ public class OutRespSimpleResult :
     ControllerBase,
     IOutResp
 {
+    internal OutRespSimpleResult()
+    {
+        Notifications = new List<string>();
+        Messages = new List<string>();
+    }
+
     public List<string> Notifications { get; protected set; }
     
     public bool IsValid { get; protected set; }
