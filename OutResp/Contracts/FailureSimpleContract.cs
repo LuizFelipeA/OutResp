@@ -12,10 +12,11 @@ public class FailureSimpleContract :
     public FailureSimpleContract()
     {
         IsSuccess = false;
+        IsValid = true;
         StatusCode = HttpStatusCode.BadRequest;
     }
 
-    public IFailureSimpleContract AddMessage(string message)
+    public IFailureSimpleContract AddMessage(in string message)
     {
         if (string.IsNullOrEmpty(message))
             return this;

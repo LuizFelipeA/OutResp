@@ -213,4 +213,13 @@ public class FailureTests
 
         Assert.IsTrue(simpleOutResp is IActionResult);
     }
+
+    [TestMethod]
+    [TestCategory("OutRespSimpleFailureResponse")]
+    public void SimpleFailureShouldReturnIsValidTrueByDefault()
+    {
+        var outResp = OutRespContract.Failure();
+        
+        Assert.IsTrue(outResp.IsValid);
+    }
 }

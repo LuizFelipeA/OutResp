@@ -10,7 +10,7 @@ public class OutRespSimpleResult :
 {
     public List<string> Notifications { get; protected set; }
     
-    public bool IsValid { get; }
+    public bool IsValid { get; protected set; }
 
     public List<string> Messages { get; protected set; }
 
