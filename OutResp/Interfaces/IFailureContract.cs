@@ -1,15 +1,18 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using OutResponse.Enums;
 
 namespace OutResp.Interfaces;
 
 public interface IFailureContract<T> : IOutResp<T>
 {
-    IFailureContract<T> AddNotification(string notification);
+    IFailureContract<T> AddNotification(in string notification, ENotificationType notificationType);
 
-    IFailureContract<T> AddNotifications(IEnumerable<string> notifications);
+    IFailureContract<T> AddNotifications(
+        IEnumerable<string> notifications,
+        ENotificationType notificationType);
     
-    IFailureContract<T> AddMessage(string message);
+    IFailureContract<T> AddMessage(in string message);
 
     IFailureContract<T> AddMessages(IEnumerable<string> messages);
 

@@ -9,6 +9,8 @@ public class OutRespSimpleResult :
     IOutResp
 {
     public List<string> Notifications { get; protected set; }
+    
+    public bool IsValid { get; }
 
     public List<string> Messages { get; protected set; }
 

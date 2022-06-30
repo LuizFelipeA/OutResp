@@ -11,6 +11,8 @@ public interface IOutResp
 {
     public List<string> Notifications { get; }
 
+    public bool IsValid { get; }
+
     public List<string> Messages { get; }
 
     public HttpStatusCode StatusCode { get; }

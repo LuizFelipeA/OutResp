@@ -15,6 +15,8 @@ public class OutRespResult<T> :
     }
 
     public List<string> Notifications { get; }
+    
+    public bool IsValid { get; protected set; }
 
     public List<string> Messages { get; }
 

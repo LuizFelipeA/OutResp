@@ -1,6 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using OutResponse;
+using OutResponse.Enums;
 
 namespace OutResp.Tests;
 
@@ -85,11 +86,42 @@ public class FailureTests
 
     [TestMethod]
     [TestCategory("OutRespFailureResponse")]
+    public void FailureShouldReturnIsValidTrueByDefault()
+    {
+        var outResp = OutRespContract.Failure<object>();
+        
+        Assert.IsTrue(outResp.IsValid);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespFailureResponse")]
+    public void FailureShouldReturnIsValidTrueWhenNotificationTypeIsEqualsToWarning()
+    {
+        var outResp = OutRespContract
+            .Failure<object>()
+            .AddNotification("notification message", ENotificationType.Warning);
+        
+        Assert.IsTrue(outResp.IsValid);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespFailureResponse")]
+    public void FailureShouldReturnIsValidFalseWhenNotificationTypeIsEqualsToError()
+    {
+        var outResp = OutRespContract
+            .Failure<object>()
+            .AddNotification("notification message", ENotificationType.Error);
+        
+        Assert.IsFalse(outResp.IsValid);
+    }
+
+    [TestMethod]
+    [TestCategory("OutRespFailureResponse")]
     public void FailureShouldReturnNotificationsSpecified()
     {
         var outResp = OutRespContract
             .Failure<object>()
-            .AddNotifications(_listNotifications);
+            .AddNotifications(_listNotifications, ENotificationType.Warning);
 
         var areEquals = outResp.Notifications
             .OrderBy(x => x)
