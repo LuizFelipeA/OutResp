@@ -4,7 +4,7 @@ using OutResp.Interfaces;
 namespace OutResponse;
 
 /// <summary>
-/// Partial class for Success complexes contracts
+/// Partial class for Success complex contracts
 /// </summary>
 public static partial class OutRespContract
 {   
@@ -16,7 +16,7 @@ public static partial class OutRespContract
 }
 
 /// <summary>
-/// Partial class for Failure complexes contracts
+/// Partial class for Failure complex contracts
 /// </summary>
 public static partial class OutRespContract
 {

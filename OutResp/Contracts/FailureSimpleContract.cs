@@ -15,7 +15,12 @@ public class FailureSimpleContract :
         IsValid = true;
         StatusCode = HttpStatusCode.BadRequest;
     }
-
+    
+    /// <summary>
+    /// Add a single message to the response
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
     public IFailureSimpleContract AddMessage(in string message)
     {
         if (string.IsNullOrEmpty(message))
@@ -24,7 +29,12 @@ public class FailureSimpleContract :
         Messages.Add(message);
         return this;
     }
-
+    
+    /// <summary>
+    /// Add an array of messages to the response
+    /// </summary>
+    /// <param name="messages"></param>
+    /// <returns></returns>
     public IFailureSimpleContract AddMessages(IEnumerable<string> messages)
     {
         if (messages is null)
@@ -33,7 +43,11 @@ public class FailureSimpleContract :
         Messages.AddRange(messages);
         return this;
     }
-
+    
+    /// <summary>
+    /// Convert the response to IActionResult.
+    /// </summary>
+    /// <returns></returns>
     public IActionResult ToActionResult()
         => StatusCode(
             (int)StatusCode,
