@@ -18,6 +18,6 @@ Install-Package OutResp
 
 **.NET CLI**
 ```
-dotnet add package Flunt
+dotnet add package OutResp
 ```
 
