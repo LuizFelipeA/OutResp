@@ -16,7 +16,7 @@ jobs:
         include:
 #          - kind: linux
 #            os: ubuntu-latest
-            target: linux-x64
+#            target: linux-x64
           - kind: windows
             os: windows-latest
             target: win-x64
