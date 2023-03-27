@@ -1,7 +1,7 @@
-name: Build Tests and Deploy Prod
+name: Publish Nuget Package 
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
@@ -21,5 +21,8 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --no-restore --configuration Release
 
-      - name: Run Tests
-        run: dotnet test --no-restore
+      - name: Create the Package
+        run: dotnet pack --no-restore --configuration Release
+
+      - name: Publish
+        run: dotnet nuget push "OutResp/bin/Release/*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/LuizFelipeA/index.json --skip-duplicate
