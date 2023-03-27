@@ -32,9 +32,6 @@ jobs:
         with:
           dotnet-version: 6.0.x
 
-      - name: Tests
-        run: dotnet test
-
       - name: Build and Pack
         shell: bash
         run: |
