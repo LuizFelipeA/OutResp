@@ -1,10 +1,14 @@
-name: Build and deploy
+#name: Build and deploy
+
+#on:
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  release:
+    types: [published]
 
 jobs:
   
@@ -12,17 +16,17 @@ jobs:
     name: Release
     strategy:
       matrix:
-        kind: ['windows']
+        kind: ['linux', 'windows', 'macOS']
         include:
-#          - kind: linux
-#            os: ubuntu-latest
-#            target: linux-x64
+          - kind: linux
+            os: ubuntu-latest
+            target: linux-x64
           - kind: windows
             os: windows-latest
             target: win-x64
-#          - kind: macOS
-#            os: macos-latest
-#            target: osx-x64
+          - kind: macOS
+            os: macos-latest
+            target: osx-x64
     runs-on: ${{ matrix.os }}
     
     steps:
