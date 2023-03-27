@@ -1,8 +1,6 @@
 name: Build and Tests Dev
 
 on:
-  push:
-    branches: [ develop ]
   pull_request:
     branches: [ develop ]
 
